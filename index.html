@@ -15,18 +15,32 @@
       color: white;
     }
 
-    /* ===== 社群列 ===== */
-    .social-bar {
-      
-      z-index: 20;
+    /* ===== Header ===== */
+    .topbar {
+      padding: 12px 16px;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
+    .topbar-row {
       display: flex;
-      
-      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-      padding: 10px;
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(10px);
+    .topbar h1 {
+      margin: 0;
+      font-size: 20px;
+      white-space: nowrap;
+    }
+
+    /* ===== 社群 icon ===== */
+    .social-bar {
+      display: flex;
+      gap: 16px;
     }
 
     .social-bar a {
@@ -35,8 +49,10 @@
       transition: all 0.25s ease;
     }
 
+    /* 🔥 Hover 發光效果 */
     .social-bar a:hover {
       transform: scale(1.2) translateY(-2px);
+      text-shadow: 0 0 8px currentColor;
     }
 
     .social-bar a.yt:hover { color: #ff0000; }
@@ -44,27 +60,9 @@
     .social-bar a.twitch:hover { color: #9146ff; }
     .social-bar a.threads:hover { color: #ffffff; }
 
-    /* ===== 上方分類列 ===== */
-    .topbar {
-      padding: 15px;
-      background: #1e293b;
-      
-      top: 0; /* 👈 關鍵：避免被社群列蓋住 */
-      z-index: 10;
-    }
-
-    .topbar-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* 左右分開 */
-    }
-
-    .topbar h1 {
-      margin: 0 0 10px;
-      font-size: 20px;
-    }
-
+    /* ===== 分類列 ===== */
     #categories {
+      margin-top: 10px;
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -111,35 +109,75 @@
     .sound-btn:active {
       transform: scale(0.95);
     }
+
+    /* =========================
+       📱 手機版優化（重點）
+    ========================= */
+    @media (max-width: 600px) {
+
+      .topbar {
+        padding: 10px;
+      }
+
+      .topbar h1 {
+        font-size: 16px;
+      }
+
+      .social-bar {
+        gap: 10px;
+      }
+
+      .social-bar a {
+        font-size: 18px;
+      }
+
+      /* 👉 防止擠在一起 */
+      .topbar-row {
+        gap: 10px;
+      }
+
+      /* 👉 分類按鈕縮小 */
+      .category-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+
+      /* 👉 音效按鈕縮小 */
+      .sound-btn {
+        font-size: 12px;
+        padding: 15px 8px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  
-
-  <!-- 🔽 分類列 -->
+  <!-- Header -->
   <header class="topbar">
-    <h1>🎧 Nyaru Soundboard</h1>
 
-    <!-- 🔥 社群列 -->
-  <div class="social-bar">
-    <a href="https://www.youtube.com/@Nyaru_NeSh1" target="_blank" class="yt">
-      <i class="fab fa-youtube"></i>
-    </a>
+    <div class="topbar-row">
+      <h1>🎧 Nyaru Soundboard</h1>
 
-    <a href="https://x.com/Nyaru_nesh1" target="_blank" class="x">
-      <i class="fab fa-x-twitter"></i>
-    </a>
+      <div class="social-bar">
+        <a href="https://www.youtube.com/@Nyaru_NeSh1" target="_blank" class="yt">
+          <i class="fab fa-youtube"></i>
+        </a>
 
-    <a href="https://www.twitch.tv/nyaru_nesh1" target="_blank" class="twitch">
-      <i class="fab fa-twitch"></i>
-    </a>
+        <a href="https://x.com/Nyaru_nesh1" target="_blank" class="x">
+          <i class="fab fa-x-twitter"></i>
+        </a>
 
-    <a href="https://www.threads.com/@nyaru_nesh1" target="_blank" class="threads">
-      <i class="fab fa-threads"></i>
-    </a>
-  </div>
+        <a href="https://www.twitch.tv/nyaru_nesh1" target="_blank" class="twitch">
+          <i class="fab fa-twitch"></i>
+        </a>
+
+        <a href="https://www.threads.com/@nyaru_nesh1" target="_blank" class="threads">
+          <i class="fab fa-threads"></i>
+        </a>
+      </div>
+    </div>
+
     <div id="categories"></div>
   </header>
 
