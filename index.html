@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>VTuber Soundboard</title>
+
+<style>
+body {
+  background: linear-gradient(135deg, #ffe4ec, #e0f7ff);
+  font-family: sans-serif;
+  text-align: center;
+  padding: 50px;
+}
+
+h1 {
+  color: #ff6fa5;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  gap: 20px;
+  justify-content: center;
+}
+
+button {
+  width: 120px;
+  height: 120px;
+  border-radius: 30px;
+  border: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255,182,193,0.8);
+}
+
+.pink { background: #ffb6c1; }
+.blue { background: #aee6ff; }
+
+</style>
+</head>
+
+<body>
+
+<h1>🎀 我的VT音效 🎀</h1>
+
+<div class="grid">
+  <button class="pink" onclick="playSound('s1')">嘔買嘎都</button>
+  <button class="blue" onclick="playSound('s2')">笑</button>
+  <button class="pink" onclick="playSound('s3')">驚</button>
+  <button class="blue" onclick="playSound('s4')">嘿嘿</button>
+  <button class="pink" onclick="playSound('s5')">哭</button>
+  <button class="blue" onclick="playSound('s6')">哈</button>
+</div>
+
+<audio id="s1" src="https://drive.google.com/file/d/1wFePOMzoYlGdeetNhv4uVUlvjaI7oFXe/view?usp=drive_link.mp3"></audio>
+<audio id="s2" src="https://discordapp.com/channels/732184462216921099/1491775480335040693/1491775521317454021.mp3"></audio>
+<audio id="s3" src="音效3.mp3"></audio>
+<audio id="s4" src="音效4.mp3"></audio>
+<audio id="s5" src="音效5.mp3"></audio>
+<audio id="s6" src="音效6.mp3"></audio>
+
+<script>
+function playSound(id){
+  var s = document.getElementById(id);
+  s.currentTime = 0;
+  s.play();
+}
+</script>
+
+</body>
+</html>
