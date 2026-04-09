@@ -17,12 +17,11 @@
 
     /* ===== 社群列 ===== */
     .social-bar {
-      position: sticky;
-      top: 0;
+      
       z-index: 20;
 
       display: flex;
-      justify-content: center;
+      
       gap: 20px;
 
       padding: 10px;
@@ -49,13 +48,20 @@
     .topbar {
       padding: 15px;
       background: #1e293b;
-      position: sticky;
-      top: 50px; /* 👈 關鍵：避免被社群列蓋住 */
+      
+      top: 0; /* 👈 關鍵：避免被社群列蓋住 */
       z-index: 10;
+    }
+
+    .topbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 左右分開 */
     }
 
     .topbar h1 {
       margin: 0 0 10px;
+      font-size: 20px;
     }
 
     #categories {
@@ -110,7 +116,13 @@
 
 <body>
 
-  <!-- 🔥 社群列 -->
+  
+
+  <!-- 🔽 分類列 -->
+  <header class="topbar">
+    <h1>🎧 Nyaru Soundboard</h1>
+
+    <!-- 🔥 社群列 -->
   <div class="social-bar">
     <a href="https://www.youtube.com/@Nyaru_NeSh1" target="_blank" class="yt">
       <i class="fab fa-youtube"></i>
@@ -128,10 +140,6 @@
       <i class="fab fa-threads"></i>
     </a>
   </div>
-
-  <!-- 🔽 分類列 -->
-  <header class="topbar">
-    <h1>🎧 Nyaru Soundboard</h1>
     <div id="categories"></div>
   </header>
 
