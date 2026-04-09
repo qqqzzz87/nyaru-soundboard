@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Nyaru Soundboard</title>
 
+  <!-- Icon 套件 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       margin: 0;
@@ -12,11 +15,42 @@
       color: white;
     }
 
+    /* ===== 社群列 ===== */
+    .social-bar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+
+      padding: 10px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .social-bar a {
+      font-size: 22px;
+      color: white;
+      transition: all 0.25s ease;
+    }
+
+    .social-bar a:hover {
+      transform: scale(1.2) translateY(-2px);
+    }
+
+    .social-bar a.yt:hover { color: #ff0000; }
+    .social-bar a.x:hover { color: #1da1f2; }
+    .social-bar a.twitch:hover { color: #9146ff; }
+    .social-bar a.threads:hover { color: #ffffff; }
+
+    /* ===== 上方分類列 ===== */
     .topbar {
       padding: 15px;
       background: #1e293b;
       position: sticky;
-      top: 0;
+      top: 50px; /* 👈 關鍵：避免被社群列蓋住 */
       z-index: 10;
     }
 
@@ -45,6 +79,7 @@
       background: #22c55e;
     }
 
+    /* ===== 音效按鈕 ===== */
     .grid {
       padding: 15px;
       display: grid;
@@ -75,6 +110,26 @@
 
 <body>
 
+  <!-- 🔥 社群列 -->
+  <div class="social-bar">
+    <a href="https://www.youtube.com/@Nyaru_NeSh1" target="_blank" class="yt">
+      <i class="fab fa-youtube"></i>
+    </a>
+
+    <a href="https://x.com/Nyaru_nesh1" target="_blank" class="x">
+      <i class="fab fa-x-twitter"></i>
+    </a>
+
+    <a href="https://www.twitch.tv/nyaru_nesh1" target="_blank" class="twitch">
+      <i class="fab fa-twitch"></i>
+    </a>
+
+    <a href="https://www.threads.com/@nyaru_nesh1" target="_blank" class="threads">
+      <i class="fab fa-threads"></i>
+    </a>
+  </div>
+
+  <!-- 🔽 分類列 -->
   <header class="topbar">
     <h1>🎧 Nyaru Soundboard</h1>
     <div id="categories"></div>
@@ -85,7 +140,6 @@
   </main>
 
   <script>
-    // 🔊 改這裡就好
     const soundData = {
       精選: [
         { name: "歐買嘎都", file: "歐買嘎都.mp3" },
