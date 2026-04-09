@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Nyaru Soundboard</title>
 
-  <!-- Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
@@ -34,9 +33,6 @@
     .topbar h1 {
       margin: 0;
       font-size: 28px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      white-space: nowrap;
     }
 
     .title-icon {
@@ -47,106 +43,85 @@
     /* ===== 社群 ===== */
     .social-bar {
       display: flex;
-      gap: 16px;
+      gap: 14px;
     }
 
     .social-bar a {
-      font-size: 22px;
+      font-size: 20px;
       color: #6b7280;
       transition: 0.25s;
     }
 
     .social-bar a:hover {
-      transform: scale(1.2) translateY(-2px);
+      transform: scale(1.2);
       text-shadow: 0 0 8px currentColor;
     }
 
-    .social-bar a.yt:hover { color: #ff6b6b; }
-    .social-bar a.x:hover { color: #60a5fa; }
-    .social-bar a.twitch:hover { color: #a78bfa; }
-    .social-bar a.threads:hover { color: #94a3b8; }
-
-    /* ===== 分類 ===== */
-    #categories {
+    /* ===== 搜尋欄 ===== */
+    .search-box {
       margin-top: 10px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      position: relative;
     }
 
-    .category-btn {
-      padding: 6px 12px;
-      border: none;
+    .search-box input {
+      width: 100%;
+      padding: 10px 14px;
       border-radius: 999px;
-      background: #dbeafe;
-      color: #3b4a5a;
-      cursor: pointer;
-      transition: 0.2s;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    .category-btn.active,
-    .category-btn:hover {
-      background: #93c5fd;
-      color: white;
-    }
-
-    /* ===== 音效 ===== */
+    /* ===== 音效區 ===== */
     .grid {
       padding: 15px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 12px;
+      gap: 14px;
     }
 
+    /* 🎀 可愛按鈕 */
     .sound-btn {
-      background: #ffffff;
+      background: linear-gradient(145deg, #ffffff, #e0f2fe);
       color: #3b4a5a;
       border: none;
-      padding: 20px 10px;
-      border-radius: 12px;
+      padding: 18px 10px;
+      border-radius: 16px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.25s ease;
       font-size: 14px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      position: relative;
     }
 
+    /* ✨ Hover 動畫 */
     .sound-btn:hover {
-      transform: scale(1.05);
-      background: #e0f2fe;
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+      background: linear-gradient(145deg, #ffffff, #bae6fd);
     }
 
     .sound-btn:active {
       transform: scale(0.95);
     }
 
-    /* 📱 手機版 */
+    /* 🎀 小裝飾點點 */
+    .sound-btn::after {
+      content: "✦";
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-size: 10px;
+      opacity: 0.5;
+    }
+
+    /* 📱 手機 */
     @media (max-width: 600px) {
-
-      .topbar h1 {
-        font-size: 18px;
-      }
-
-      .title-icon {
-        font-size: 22px;
-      }
-
-      .social-bar {
-        gap: 10px;
-      }
-
-      .social-bar a {
-        font-size: 18px;
-      }
-
-      .category-btn {
-        font-size: 12px;
-        padding: 5px 10px;
-      }
-
-      .sound-btn {
-        font-size: 12px;
-        padding: 15px 8px;
-      }
+      .topbar h1 { font-size: 18px; }
+      .title-icon { font-size: 22px; }
+      .sound-btn { font-size: 12px; padding: 14px 8px; }
     }
   </style>
 </head>
@@ -158,22 +133,16 @@
       <h1><span class="title-icon">🎧</span>Nyaru Soundboard</h1>
 
       <div class="social-bar">
-        <a href="https://www.youtube.com/@Nyaru_NeSh1" target="_blank" class="yt">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://x.com/Nyaru_nesh1" target="_blank" class="x">
-          <i class="fab fa-x-twitter"></i>
-        </a>
-        <a href="https://www.twitch.tv/nyaru_nesh1" target="_blank" class="twitch">
-          <i class="fab fa-twitch"></i>
-        </a>
-        <a href="https://www.threads.com/@nyaru_nesh1" target="_blank" class="threads">
-          <i class="fab fa-threads"></i>
-        </a>
+        <a href="https://www.youtube.com/@Nyaru_NeSh1" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/Nyaru_nesh1" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.twitch.tv/nyaru_nesh1" target="_blank"><i class="fab fa-twitch"></i></a>
       </div>
     </div>
 
-    <div id="categories"></div>
+    <!-- 🔍 搜尋 -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜尋音效...">
+    </div>
   </header>
 
   <main>
@@ -181,67 +150,41 @@
   </main>
 
   <script>
-    const soundData = {
-      動漫: [
-        { name: "啊啊啊", file: "sounds/a.mp3" }
-      ],
-      搞笑: [
-        { name: "蛤", file: "sounds/huh.mp3" }
-      ]
-    };
+    const soundData = [
+      { name: "歐買嘎都", file: "歐買嘎都.mp3" },
+      { name: "蛤", file: "sounds/huh.mp3" },
+      { name: "笑聲", file: "sounds/laugh.mp3" }
+    ];
 
-    let currentCategory = "動漫";
-
-    const categoryContainer = document.getElementById("categories");
     const grid = document.getElementById("soundGrid");
+    const searchInput = document.getElementById("searchInput");
 
-    function init() {
-      renderCategories();
-      renderSounds();
-    }
-
-    function renderCategories() {
-      categoryContainer.innerHTML = "";
-
-      Object.keys(soundData).forEach(cat => {
-        const btn = document.createElement("button");
-        btn.textContent = cat;
-        btn.className = "category-btn";
-
-        if (cat === currentCategory) {
-          btn.classList.add("active");
-        }
-
-        btn.onclick = () => {
-          currentCategory = cat;
-          renderCategories();
-          renderSounds();
-        };
-
-        categoryContainer.appendChild(btn);
-      });
-    }
-
-    function renderSounds() {
+    function renderSounds(filter = "") {
       grid.innerHTML = "";
 
-      soundData[currentCategory].forEach(sound => {
+      const filtered = soundData.filter(s =>
+        s.name.toLowerCase().includes(filter.toLowerCase())
+      );
+
+      filtered.forEach(sound => {
         const btn = document.createElement("button");
         btn.className = "sound-btn";
         btn.textContent = sound.name;
 
-        btn.onclick = () => playSound(sound.file);
+        btn.onclick = () => {
+          const audio = new Audio(sound.file);
+          audio.play();
+        };
 
         grid.appendChild(btn);
       });
     }
 
-    function playSound(src) {
-      const audio = new Audio(src);
-      audio.play();
-    }
+    searchInput.addEventListener("input", e => {
+      renderSounds(e.target.value);
+    });
 
-    init();
+    renderSounds();
   </script>
 
 </body>
