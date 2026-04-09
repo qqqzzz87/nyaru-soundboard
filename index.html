@@ -1,78 +1,157 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<title>VTuber Soundboard</title>
+  <meta charset="UTF-8">
+  <title>Nyaru Soundboard</title>
 
-<style>
-body {
-  background: linear-gradient(135deg, #ffe4ec, #e0f7ff);
-  font-family: sans-serif;
-  text-align: center;
-  padding: 50px;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #0f172a;
+      color: white;
+    }
 
-h1 {
-  color: #ff6fa5;
-}
+    .topbar {
+      padding: 15px;
+      background: #1e293b;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 120px);
-  gap: 20px;
-  justify-content: center;
-}
+    .topbar h1 {
+      margin: 0 0 10px;
+    }
 
-button {
-  width: 120px;
-  height: 120px;
-  border-radius: 30px;
-  border: none;
-  font-size: 18px;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
+    #categories {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255,182,193,0.8);
-}
+    .category-btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 999px;
+      background: #334155;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-.pink { background: #ffb6c1; }
-.blue { background: #aee6ff; }
+    .category-btn.active,
+    .category-btn:hover {
+      background: #22c55e;
+    }
 
-</style>
+    .grid {
+      padding: 15px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+    }
+
+    .sound-btn {
+      background: #1e293b;
+      border: none;
+      padding: 20px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 14px;
+    }
+
+    .sound-btn:hover {
+      transform: scale(1.05);
+      background: #334155;
+    }
+
+    .sound-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>🎀 我的VT音效 🎀</h1>
+  <header class="topbar">
+    <h1>🎧 Nyaru Soundboard</h1>
+    <div id="categories"></div>
+  </header>
 
-<div class="grid">
-  <button class="pink" onclick="playSound('s1')">嘔買嘎都</button>
-  <button class="blue" onclick="playSound('s2')">歐買嘎都</button>
-  <button class="pink" onclick="playSound('s3')">驚</button>
-  <button class="blue" onclick="playSound('s4')">嘿嘿</button>
-  <button class="pink" onclick="playSound('s5')">哭</button>
-  <button class="blue" onclick="playSound('s6')">哈</button>
-</div>
+  <main>
+    <div id="soundGrid" class="grid"></div>
+  </main>
 
-<audio id="s1" src="歐買嘎都.mp3"></audio>
-<audio id="s2" src="歐買嘎都.mp3"></audio>
-<audio id="s3" src="音效3.mp3"></audio>
-<audio id="s4" src="音效4.mp3"></audio>
-<audio id="s5" src="音效5.mp3"></audio>
-<audio id="s6" src="音效6.mp3"></audio>
+  <script>
+    // 🔊 改這裡就好
+    const soundData = {
+      精選: [
+        { name: "歐買嘎都", file: "歐買嘎都.mp3" },
+        { name: "笑聲", file: "sounds/laugh.mp3" }
+      ],
+      動漫: [
+        { name: "啊啊啊", file: "sounds/a.mp3" }
+      ],
+      搞笑: [
+        { name: "蛤", file: "sounds/huh.mp3" }
+      ]
+    };
 
-<script>
-function playSound(id){
-  var s = document.getElementById(id);
-  s.currentTime = 0;
-  s.play();
-}
-</script>
+    let currentCategory = "精選";
+
+    const categoryContainer = document.getElementById("categories");
+    const grid = document.getElementById("soundGrid");
+
+    function init() {
+      renderCategories();
+      renderSounds();
+    }
+
+    function renderCategories() {
+      categoryContainer.innerHTML = "";
+
+      Object.keys(soundData).forEach(cat => {
+        const btn = document.createElement("button");
+        btn.textContent = cat;
+        btn.className = "category-btn";
+
+        if (cat === currentCategory) {
+          btn.classList.add("active");
+        }
+
+        btn.onclick = () => {
+          currentCategory = cat;
+          renderCategories();
+          renderSounds();
+        };
+
+        categoryContainer.appendChild(btn);
+      });
+    }
+
+    function renderSounds() {
+      grid.innerHTML = "";
+
+      soundData[currentCategory].forEach(sound => {
+        const btn = document.createElement("button");
+        btn.className = "sound-btn";
+        btn.textContent = sound.name;
+
+        btn.onclick = () => playSound(sound.file);
+
+        grid.appendChild(btn);
+      });
+    }
+
+    function playSound(src) {
+      const audio = new Audio(src);
+      audio.play();
+    }
+
+    init();
+  </script>
 
 </body>
 </html>
