@@ -52,7 +52,7 @@ body {
   animation:
     floatingBg 18s ease-in-out infinite;
 
-  /* 🔥 模糊 */
+  /* 背景模糊 */
   filter: blur(3px);
 }
 
@@ -84,7 +84,7 @@ body {
 }
 
 /* =========================
-   🌑 深色透明遮罩
+   🌑 深色遮罩
 ========================= */
 
 .bg-overlay {
@@ -92,7 +92,6 @@ body {
   inset: 0;
   z-index: -2;
 
-  /* 🔥 提高透明度 */
   background:
     linear-gradient(
       rgba(10, 15, 25, 0.72),
@@ -438,11 +437,13 @@ body {
 
 <div class="bg-slideshow">
 
-  <!-- 🔥 放入你的圖片 -->
+  <!-- 第一張 -->
   <div class="bg-slide active"
   style="background-image:url('images/吐舌WINK.png')">
   </div>
-    <div class="bg-slide active"
+
+  <!-- 第二張 -->
+  <div class="bg-slide"
   style="background-image:url('images/蠟筆畫風杯.png')">
   </div>
 
@@ -487,7 +488,7 @@ body {
     </div>
   </div>
 
-  <!-- 🔍 搜尋欄 -->
+  <!-- 搜尋欄 -->
   <div class="search-box">
 
     <input
@@ -518,7 +519,7 @@ const soundData = [
 
   {
     name: "歐買嘎都",
-    file: "歐買嘎都.mp3"
+    file: "sounds/歐買嘎都.mp3"
   },
 
   {
@@ -583,6 +584,31 @@ searchInput.addEventListener(
 );
 
 renderSounds();
+
+/* =========================
+   🌌 幻燈片切換
+========================= */
+
+const slides =
+document.querySelectorAll(".bg-slide");
+
+let currentSlide = 0;
+
+function changeSlide() {
+
+  slides[currentSlide]
+  .classList.remove("active");
+
+  currentSlide =
+  (currentSlide + 1)
+  % slides.length;
+
+  slides[currentSlide]
+  .classList.add("active");
+}
+
+/* 🔥 3分鐘切換一次 */
+setInterval(changeSlide, 180000);
 
 /* =========================
    ✨ 漂浮粒子
